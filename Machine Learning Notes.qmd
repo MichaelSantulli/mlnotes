@@ -1,0 +1,366 @@
+---
+title: "Intro to Machine Learning Notes"
+subtitle: "Introduction to Machine Learning/Statistical Analysis and Learning"
+format: 
+  html: 
+    toc: true
+    toc-depth: 6
+    theme: cosmo
+  pdf: default
+editor: visual
+---
+
+## R Setup
+
+```{r}
+#| output = FALSE
+#Load packages for chapter labs
+library("ISLR2") #Introduction to Statistical Learning datasets'
+library("tidyverse")
+```
+
+## Week 1 Notes
+
+Types of machine learning:
+
+-   Supervised learning
+
+    -   Regression models - quantitative/continous output
+    -   Classification models - qualitative/discrete output
+
+-   Unsupervised learning
+
+    -   Clustering models - patterns from input data without specified output
+
+Why study statistical learning?
+
+-   Inference - how does a particular input drive an output variable
+
+-   Prediction - only the value of the outcome variable is of interest
+
+    -   Example: "How much rainfall will California have in 2050?"?
+
+## Week 2: Statistical Learning Introduction
+
+### Notes
+
+Shared assumptions of linear and non-linear statistical models for estimating *f*:
+
+-   Parametric vs. non-parametric
+
+-   Flexibility (complexity) vs. interpretability
+
+    -   Flexible models are beneficial for prediction
+    -   Interpretable models are beneficial for inference
+
+-   Supervised vs. unsupervised learning
+
+    -   Unsupervised has no specified outcome variable
+
+How to determine the best statistical model for a problem
+
+-   Quality of fit
+
+-   Variance/Bias tradeoff
+
+    -   Variance: the amount by which $\hat{f}$ would change if estimated with a different training set
+    -   Bias: the error that is introduced by approximating a real-life problem, which may be extremely complicated, by a much simpler model.
+    -   In general, with more flexible methods, variance increases and bias decreases
+
+Inference vs. Prediction
+
+-   Sometimes both are of interest, but often only one is of primary interest. The goals of the analyst here are the primary driver in selecting a model
+
+How do we estimate *f*?
+
+-   Training data used to estimate *f*
+
+-   Parametric approach
+
+    -   Step 1: Specify an estimated functional form for *f* (i.e. a linear function)
+
+    -   Step 2: Training data is used to estimate the parameters of the function
+
+    -   Disadvantage of parametric methods: not well suited to estimate a function for a complex dataset
+
+-   Non-parametric approach
+
+    -   Avoids the assumption of a particular functional form for *f*
+
+    -   Disadvantage: they require very large data sets to make an accurate prediction of *f*
+
+Why would we ever choose to use a more restrective method instead of a very flexible approach?
+
+-   Interpretability, inference, to avoid overfitting
+
+Should we always choose a more complex (flexible) approach when prediction is the objective?
+
+-   Only if there is a very large dataset. With a small amount of data, more complexity is not always good
+
+Measuring the Quality of Fit
+
+-   Mean Squared Error (MSE)
+
+    $$
+    MSE = \frac{1}{n}\sum_{i=1}^n(y_i-\hat{f}(x_i))^2
+    $$
+
+-   Training MSE vs. Test MSE
+
+-   Why does *training* MSE always decrease with added flexibility?
+
+    -   With enough flexibility you can get your model to perfectly fit the training data (but *test* MSE would be much worse)
+
+-   highest quality of fit does not equal the best predictive model (overfitting)
+
+### Lab: Intro to R
+
+`c()` Create a vector of items
+
+`length()` Returns the length of a vector
+
+`ls()` Lists all objects such as data and functions saved in the environment
+
+`rm()` Remove an object from the environment
+
+`matrix(data = , nrow = , ncol =)` Create a matrix
+
+`sqrt()` calculate the square root
+
+`rnorm(n)` Generates a vector of random normal variables of ~n~ sample size
+
+`cor(x, y)` Calculates the correlation between two sets of numbers
+
+`set.seed()` Used to set a consistent seed for a random number function
+
+`mean()` Mean
+
+`var()` Variance
+
+`sd()` Standard Deviation
+
+`plot()` Basic plotting function
+
+`countour()` Creates a countour plot to represent 3D data
+
+```{r}
+x <- seq(1,10)
+x
+x <- 1:10
+x
+x <- seq(-pi, pi, length = 50)
+
+y <- x
+f <- outer(x, y, function(x, y) cos(y) / (1 + x^2))
+
+contour(x, y, f)
+contour(x, y, f, nlevels = 45, add = T)
+fa <- (f - t(f)) / 2
+contour(x, y, fa, nlevels = 15)
+```
+
+`image()` Produces a heatmap plot
+
+`persp()` Creates a 3D plot, arguments `theta` and `phi` control the viewing angles
+
+```{r}
+image(x, y, fa)
+persp(x, y, fa)
+persp(x, y, fa, theta = 30)
+persp(x, y, fa, theta = 30, phi = 20)
+persp(x, y, fa, theta = 30, phi = 70)
+persp(x, y, fa, theta = 30, phi = 40)
+```
+
+`dim()` Dimension function returns the number of rows and columns of a matrix
+
+`read.table()` Import data
+
+`write.table()` Export data
+
+Data Frame functions
+
+`data.frame()` Create a data frame
+
+`str()` Used to view a list of variables and first few observations in a data table
+
+`subset()` Used to filter a data table
+
+`order()` Used to return the order of a vector, can sort a data table
+
+`list()` Create a list
+
+## Week 3: Linear Regression
+
+### Notes
+
+Inference problem example - which advertising strategy will lead to higher product sales next year?
+
+*Simple linear regression* is a a method for predicting a quantitatie response *Y* on the basis of a single predictor variable *X*. A simple model uses the equation:
+
+$$
+Y \approx \beta_0 + \beta_1x_1
+$$ Residual Sum of Squares (RSS) is the sum of differences between the observed vaues and predicted values
+
+Least squares estimation method minimizes RSS to created an estimation line with the equation above. $\beta_1$ and $\beta_0$ are computable from the predictors and outcomes in the dataset
+
+Standard Errors for OLS estimates
+
+Hypothesis testing steps - if the regression shows a positive or negative sloped line based on the sample, how can we be sure that it is *not* actually a flat line in the population?
+
+1.  estimate parameters and standard errors
+
+2.  calculate t-statistic
+
+3.  Find the corresponding p value
+
+    -   When the t-statistic is large and the p value is low, we can reject the null hypothesis
+
+Accuracy of the model: how well does the model fit the data?
+
+-   *RSE* (Residual Standard Error)
+
+    -   How far on average are the actual outcomes from the prediction line?
+
+-   $R^2$ statistic
+
+    -   A proportional measure always between 0 and 1 that shows how much variation in the data is explained by the model
+
+    -   Can $R^2$ be negative? Technically yes if the model is very bad
+
+-   *F-*statistic
+
+    -   Not about significance but about whether you can reject the null hypothesis for the whole model
+
+Multiple Linear Regression
+
+### Lab: Regression in R
+
+#### Simple Linear Regression
+
+Boston dataset: The outome variable `medv` is median home value by census tract
+
+```{r}
+library(MASS)
+
+#view the first 10 observations of the dataset
+head(Boston)
+
+#Create a regression equation 
+attach(Boston)
+lm.fit <- lm(medv ~ lstat)
+
+#View the regression results
+lm.fit
+
+#View details about the regression
+summary(lm.fit)
+
+#See what is stored in the lm.fit list
+names(lm.fit)
+
+#Function to view the coefficients of lm.fit
+coef(lm.fit)
+
+#View the confidence interval
+confint(lm.fit)
+
+#Generate confidence intervals for given values of lstat
+predict(lm.fit, data.frame(lstat = (c(5, 10, 15))), interval = "confidence")
+
+#Generate prediction intervals for given values of lstat
+predict(lm.fit, data.frame(lstat = (c(5, 10, 15))), interval = "prediction")
+
+#plot
+plot(lstat, medv)
+
+#Add the least squares line to the plot
+abline(lm.fit, lwd = 3, col = "red")
+
+#Use 'col =' to change the color of the points
+plot(lstat, medv, col = "red")
+
+#Use 'pch =' to change the shape of the points
+plot(lstat, medv, pch = 20)
+
+#Define the point shape directly
+plot(lstat, medv, pch = "+")
+
+#Define the point shape with a number
+plot(1:20, 1:20, pch = 1:20)
+
+
+par(mfrow = c(2,2))
+plot(lm.fit)
+
+plot(predict(lm.fit), residuals(lm.fit))
+plot(predict(lm.fit), rstudent(lm.fit))
+
+plot(hatvalues(lm.fit))
+which.max(hatvalues(lm.fit))
+
+```
+
+#### Multiple Linear Regression
+
+```{r}
+
+#Run a regression with specified predictors
+lm.fit <- lm(medv ~ lstat + age, data = Boston)
+summary(lm.fit)
+
+#Run a regression on all the predictor variables in the dataset
+lm.fit <- lm(formula = medv ~ ., data = Boston)
+summary(lm.fit)
+
+library(car)
+#Calculate variance inflation factors
+vif(lm.fit)
+
+#Run the regression all predictors except one (age) using the "-" sign
+lm.fit1 <- lm(medv ~ . - age, data = Boston)
+summary(lm.fit1)
+
+#Another way to change the model using update()
+lm.fit1 <- update(lm.fit, ~ . - age)
+
+
+```
+
+#### Interaction terms
+
+There are two ways to include interaction terms in the lm() funtion: $x_1:x_2$ creates an interaction term between the two variables. $x_1 * x_2$ creates an individual variable for each *plus* an interaction term.
+
+($x_1 * x_2$ is shorthand for $x_1 + x_2 + x_1:x_2$)
+
+```{r}
+#Run a regression with a predictor variable
+summary(lm(medv ~ lstat*age, data = Boston))
+```
+
+#### Non-linear transformations on predictors
+
+To transform a variable in `lm()`, use `I()`. For example, to square a predictor you would use `I(x^2)`.
+
+For higher order variables, use the `poly()` function.
+
+```{r}
+#Run a regression with a squared predictor term
+lm.fit2 <- lm(medv ~ lstat + I(lstat^2))
+summary(lm.fit2)
+
+#Use anova() to see if the quadratic fit is better than the original linear fit
+lm.fit <- lm(medv ~ lstat)
+anova(lm.fit, lm.fit2)
+
+par(mfrow = c(2,2))
+plot(lm.fit2)
+
+
+```
+
+#### Qualitative predictors
+
+#### Writing functions in R
+
+## Week 4: Classification
