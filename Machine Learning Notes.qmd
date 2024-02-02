@@ -6,6 +6,7 @@ format:
     toc: true
     toc-depth: 6
     theme: cosmo
+    keep-md: true
   pdf: default
 editor: visual
 ---
