@@ -361,6 +361,10 @@ plot(lm.fit2)
 ```
 
 #### Qualitative predictors
+```{r}
+
+```
+
 
 #### Writing functions in R
 
