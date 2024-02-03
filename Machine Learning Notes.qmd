@@ -6,7 +6,7 @@ format:
     toc: true
     toc-depth: 6
     theme: cosmo
-    keep-md: true
+  github_document:
   pdf: default
 editor: visual
 ---
