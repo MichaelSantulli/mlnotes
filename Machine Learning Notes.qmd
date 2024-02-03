@@ -7,6 +7,7 @@ format:
     toc: true
     toc-depth: 6
     theme: cosmo
+    keep-md: true
   pdf: default
 editor: visual
 ---
@@ -362,7 +363,7 @@ plot(lm.fit2)
 
 #### Qualitative predictors
 ```{r}
-
+#test1
 ```
 
 
