@@ -1,12 +1,12 @@
 ---
 title: "Intro to Machine Learning Notes"
 subtitle: "Introduction to Machine Learning/Statistical Analysis and Learning"
-format: 
+format:
+  gfm: default 
   html: 
     toc: true
     toc-depth: 6
     theme: cosmo
-    keep-md: true
   pdf: default
 editor: visual
 ---
