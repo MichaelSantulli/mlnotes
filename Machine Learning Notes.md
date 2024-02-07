@@ -252,7 +252,7 @@ data table
 Inference problem example - which advertising strategy will lead to
 higher product sales next year?
 
-*Simple linear regression* is a a method for predicting a quantitatie
+*Simple linear regression* is a a method for predicting a quantitative
 response *Y* on the basis of a single predictor variable *X*. A simple
 model uses the equation:
 
@@ -299,6 +299,25 @@ Accuracy of the model: how well does the model fit the data?
     hypothesis for the whole model
 
 Multiple Linear Regression
+
+Important questions in MLR:
+
+1.  Is at least one of the predictors useful in predicting the response?
+    Check with the F-statistic
+
+2.  Do all the predictors help to explain Y, or is only a subset of the
+    predictors useful? Will be covered in Ch. 6
+
+3.  How well does the model fit the data?
+
+4.  Given a set of predictor values, what response value should we
+    predict, and how accurate is our prediction?
+
+Confidence intervals connect the sample variable to the population
+variable within a certain degree of confidence. A 95% confidence
+interval says that 95% of random samples will fall within the interval.
+
+Potential problems in MLR:
 
 ### Lab: Regression in R
 
@@ -711,12 +730,157 @@ plot(lm.fit2)
 
 ![](Machine-Learning-Notes_files/figure-commonmark/unnamed-chunk-7-1.png)
 
-#### Qualitative predictors
+``` r
+#Use the poly() function within lm() to generate a regression with higher order polynomials
+lm.fit5 <- lm(medv ~ poly(lstat, 5))
+summary(lm.fit5)
+```
+
+
+    Call:
+    lm(formula = medv ~ poly(lstat, 5))
+
+    Residuals:
+         Min       1Q   Median       3Q      Max 
+    -13.5433  -3.1039  -0.7052   2.0844  27.1153 
+
+    Coefficients:
+                     Estimate Std. Error t value Pr(>|t|)    
+    (Intercept)       22.5328     0.2318  97.197  < 2e-16 ***
+    poly(lstat, 5)1 -152.4595     5.2148 -29.236  < 2e-16 ***
+    poly(lstat, 5)2   64.2272     5.2148  12.316  < 2e-16 ***
+    poly(lstat, 5)3  -27.0511     5.2148  -5.187 3.10e-07 ***
+    poly(lstat, 5)4   25.4517     5.2148   4.881 1.42e-06 ***
+    poly(lstat, 5)5  -19.2524     5.2148  -3.692 0.000247 ***
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+    Residual standard error: 5.215 on 500 degrees of freedom
+    Multiple R-squared:  0.6817,    Adjusted R-squared:  0.6785 
+    F-statistic: 214.2 on 5 and 500 DF,  p-value: < 2.2e-16
 
 ``` r
-#test1
+#Generate a regression with a log-transformed variable
+summary(lm(medv ~ log(rm), data = Boston))
 ```
+
+
+    Call:
+    lm(formula = medv ~ log(rm), data = Boston)
+
+    Residuals:
+        Min      1Q  Median      3Q     Max 
+    -19.487  -2.875  -0.104   2.837  39.816 
+
+    Coefficients:
+                Estimate Std. Error t value Pr(>|t|)    
+    (Intercept)  -76.488      5.028  -15.21   <2e-16 ***
+    log(rm)       54.055      2.739   19.73   <2e-16 ***
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+    Residual standard error: 6.915 on 504 degrees of freedom
+    Multiple R-squared:  0.4358,    Adjusted R-squared:  0.4347 
+    F-statistic: 389.3 on 1 and 504 DF,  p-value: < 2.2e-16
+
+#### Qualitative predictors
+
+`lm()` automatically generates dummy variables in a regression on a
+dataset with qualitative variables.
+
+``` r
+#Preview the Carseats dataset with information about carseat sales
+str(Carseats)
+```
+
+    'data.frame':   400 obs. of  11 variables:
+     $ Sales      : num  9.5 11.22 10.06 7.4 4.15 ...
+     $ CompPrice  : num  138 111 113 117 141 124 115 136 132 132 ...
+     $ Income     : num  73 48 35 100 64 113 105 81 110 113 ...
+     $ Advertising: num  11 16 10 4 3 13 0 15 0 0 ...
+     $ Population : num  276 260 269 466 340 501 45 425 108 131 ...
+     $ Price      : num  120 83 80 97 128 72 108 120 124 124 ...
+     $ ShelveLoc  : Factor w/ 3 levels "Bad","Good","Medium": 1 2 3 3 1 1 3 2 3 3 ...
+     $ Age        : num  42 65 59 55 38 78 71 67 76 76 ...
+     $ Education  : num  17 10 12 14 13 16 15 10 10 17 ...
+     $ Urban      : Factor w/ 2 levels "No","Yes": 2 2 2 2 2 1 2 2 1 1 ...
+     $ US         : Factor w/ 2 levels "No","Yes": 2 2 2 2 1 2 1 2 1 2 ...
+
+``` r
+#A regression on Carseats data with all variables and some interaction terms
+lm.fit <- lm(Sales ~ . + Income:Advertising + Price:Age, data = Carseats)
+summary(lm.fit)
+```
+
+
+    Call:
+    lm(formula = Sales ~ . + Income:Advertising + Price:Age, data = Carseats)
+
+    Residuals:
+        Min      1Q  Median      3Q     Max 
+    -2.9208 -0.7503  0.0177  0.6754  3.3413 
+
+    Coefficients:
+                         Estimate Std. Error t value Pr(>|t|)    
+    (Intercept)         6.5755654  1.0087470   6.519 2.22e-10 ***
+    CompPrice           0.0929371  0.0041183  22.567  < 2e-16 ***
+    Income              0.0108940  0.0026044   4.183 3.57e-05 ***
+    Advertising         0.0702462  0.0226091   3.107 0.002030 ** 
+    Population          0.0001592  0.0003679   0.433 0.665330    
+    Price              -0.1008064  0.0074399 -13.549  < 2e-16 ***
+    ShelveLocGood       4.8486762  0.1528378  31.724  < 2e-16 ***
+    ShelveLocMedium     1.9532620  0.1257682  15.531  < 2e-16 ***
+    Age                -0.0579466  0.0159506  -3.633 0.000318 ***
+    Education          -0.0208525  0.0196131  -1.063 0.288361    
+    UrbanYes            0.1401597  0.1124019   1.247 0.213171    
+    USYes              -0.1575571  0.1489234  -1.058 0.290729    
+    Income:Advertising  0.0007510  0.0002784   2.698 0.007290 ** 
+    Price:Age           0.0001068  0.0001333   0.801 0.423812    
+    ---
+    Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+    Residual standard error: 1.011 on 386 degrees of freedom
+    Multiple R-squared:  0.8761,    Adjusted R-squared:  0.8719 
+    F-statistic:   210 on 13 and 386 DF,  p-value: < 2.2e-16
+
+``` r
+#Use contrasts() to view the coding scheme for a qualitative variable
+attach(Carseats)
+contrasts(ShelveLoc)
+```
+
+           Good Medium
+    Bad       0      0
+    Good      1      0
+    Medium    0      1
 
 #### Writing functions in R
 
+``` r
+#Write a function to load relevant libraries
+LoadLibraries <- function() {
+  library(ISLR2)
+  library(MASS)
+  print("The libraries have been loaded.")
+}
+```
+
 ## Week 4: Classification
+
+### Notes
+
+Classification techniques are used when the dependent variable Y is
+qualitative or categorical.
+
+1.  Logistic regression
+    1.  Create probability functions to estimate coefficients based on
+        training data
+    2.  Use new probability equation to predict probabilities
+    3.  Set a boundary (i.e. .5) to classy to one category or the other
+    4.  interpreting coefficients - change in log-odds, not change in
+        probability
+2.  Linear Discriminant Analysis
+3.  Quadratic Discriminant Analysis
+4.  Naive Bayes
+
+Comparison of methods

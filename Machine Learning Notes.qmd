@@ -197,7 +197,7 @@ Data Frame functions
 
 Inference problem example - which advertising strategy will lead to higher product sales next year?
 
-*Simple linear regression* is a a method for predicting a quantitatie response *Y* on the basis of a single predictor variable *X*. A simple model uses the equation:
+*Simple linear regression* is a a method for predicting a quantitative response *Y* on the basis of a single predictor variable *X*. A simple model uses the equation:
 
 $$
 Y \approx \beta_0 + \beta_1x_1
@@ -234,6 +234,20 @@ Accuracy of the model: how well does the model fit the data?
     -   Not about significance but about whether you can reject the null hypothesis for the whole model
 
 Multiple Linear Regression
+
+Important questions in MLR:
+
+1.  Is at least one of the predictors useful in predicting the response? Check with the F-statistic
+
+2.  Do all the predictors help to explain Y, or is only a subset of the predictors useful? Will be covered in Ch. 6
+
+3.  How well does the model fit the data?
+
+4.  Given a set of predictor values, what response value should we predict, and how accurate is our prediction?
+
+Confidence intervals connect the sample variable to the population variable within a certain degree of confidence. A 95% confidence interval says that 95% of random samples will fall within the interval.
+
+Potential problems in MLR:
 
 ### Lab: Regression in R
 
@@ -357,15 +371,59 @@ anova(lm.fit, lm.fit2)
 par(mfrow = c(2,2))
 plot(lm.fit2)
 
+#Use the poly() function within lm() to generate a regression with higher order polynomials
+lm.fit5 <- lm(medv ~ poly(lstat, 5))
+summary(lm.fit5)
+
+#Generate a regression with a log-transformed variable
+summary(lm(medv ~ log(rm), data = Boston))
 
 ```
 
 #### Qualitative predictors
-```{r}
-#test1
-```
 
+`lm()` automatically generates dummy variables in a regression on a dataset with qualitative variables.
+
+```{r}
+
+#Preview the Carseats dataset with information about carseat sales
+str(Carseats)
+
+#A regression on Carseats data with all variables and some interaction terms
+lm.fit <- lm(Sales ~ . + Income:Advertising + Price:Age, data = Carseats)
+summary(lm.fit)
+
+#Use contrasts() to view the coding scheme for a qualitative variable
+attach(Carseats)
+contrasts(ShelveLoc)
+```
 
 #### Writing functions in R
 
+```{r}
+#Write a function to load relevant libraries
+LoadLibraries <- function() {
+  library(ISLR2)
+  library(MASS)
+  print("The libraries have been loaded.")
+}
+
+
+```
+
 ## Week 4: Classification
+
+### Notes
+
+Classification techniques are used when the dependent variable Y is qualitative or categorical.
+
+1.  Logistic regression
+    1.  Create probability functions to estimate coefficients based on training data
+    2.  Use new probability equation to predict probabilities
+    3.  Set a boundary (i.e. .5) to classy to one category or the other
+    4.  interpreting coefficients - change in log-odds, not change in probability
+2.  Linear Discriminant Analysis
+3.  Quadratic Discriminant Analysis
+4.  Naive Bayes
+
+Comparison of methods
