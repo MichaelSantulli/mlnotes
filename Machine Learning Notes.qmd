@@ -1,8 +1,12 @@
 ---
 title: "Intro to Machine Learning Notes"
 subtitle: "Introduction to Machine Learning/Statistical Analysis and Learning"
+
+project:
+  type: website
+  output-dir: docs
+  
 format:
-  gfm: default 
   html: 
     toc: true
     toc-depth: 6
@@ -41,7 +45,7 @@ Why study statistical learning?
 
     -   Example: "How much rainfall will California have in 2050?"?
 
-## Week 2: Statistical Learning Introduction
+## Chapter 2: Statistical Learning Introduction
 
 ### Notes
 
@@ -191,7 +195,7 @@ Data Frame functions
 
 `list()` Create a list
 
-## Week 3: Linear Regression
+## Chapter 3: Linear Regression
 
 ### Notes
 
@@ -411,19 +415,67 @@ LoadLibraries <- function() {
 
 ```
 
-## Week 4: Classification
+## Chapter 4: Classification
 
 ### Notes
 
 Classification techniques are used when the dependent variable Y is qualitative or categorical.
 
 1.  Logistic regression
-    1.  Create probability functions to estimate coefficients based on training data
-    2.  Use new probability equation to predict probabilities
-    3.  Set a boundary (i.e. .5) to classy to one category or the other
-    4.  interpreting coefficients - change in log-odds, not change in probability
-2.  Linear Discriminant Analysis
-3.  Quadratic Discriminant Analysis
-4.  Naive Bayes
+    A.  Estimation process:
+        1.  Create probability functions to estimate coefficients based on training data
+        2.  Use new probability equation to predict probabilities
+        3.  Set a boundary (i.e. .5) to classy to one category or the other
+        4.  interpreting coefficients - change in log-odds, not change in probability
+    B.  Note: the coefficients estimated in logistic regression are the change in *log-odds*, however, these can be plugged back into an equation to calculate probability
+2.  Bayes Classifier
+    1.  Calculate probabilities of each classification outcome
+
+    2.  Bayes classifier picks the largest probability to assign a class
+
+    3.  What kind of data is needed to calculate probabilities in step 1? You need a lot of it to make accurate calculations, and sufficient data is not often available. It can, however, be used with simulated data for examples.
+3.  Linear Discriminant Analysis (LDA)
+    1.  Bayes Theorem - used to flip conditional probabilities
+    2.  Assumption - the distributions of X are normal or Gaussian
+    3.  Assumption - both the outcome distributions have the same variance (not an assumption of QDA)
+    4.  Data statistics needed to plug into the equation with two classes and one predictor: $\sigma, \pi_1, \pi_2, \mu_1, \mu_2$ where $\sigma$ is the shared variance, $\pi_1 and \pi_2$ are the prior probabilities of k = 1, 2, and $\mu_1 and \mu_2$ are the means
+4.  Quadratic Discriminant Analysis (QDA)
+5.  Naive Bayes
 
 Comparison of methods
+
+### Lab: Classification Methods in R
+
+```{r}
+names(Smarket)
+dim(Smarket)
+summary(Smarket)
+
+cor(Smarket[,-9])
+
+attach(Smarket)
+plot(Volume)
+```
+
+#### Logistic Regression
+The `glm()` function can be used for generalized linear models including logistic regression. Need to include the argument `family = binomial` to specify logistic regression as the method.
+
+
+```{r}
+#Construct a logistic regression model to predict the qualitative variable Direction
+glm.fits <- glm(
+  Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + Volume, data = Smarket, family = binomial
+)
+
+summary(glm.fits)
+
+```
+
+#### Linear Discriminant Analysis
+
+
+#### Quadratic Discriminant Analysis
+
+
+#### Naive Bayes
+

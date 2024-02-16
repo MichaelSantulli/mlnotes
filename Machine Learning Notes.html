@@ -83,12 +83,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#r-setup" id="toc-r-setup" class="nav-link active" data-scroll-target="#r-setup">R Setup</a></li>
   <li><a href="#week-1-notes" id="toc-week-1-notes" class="nav-link" data-scroll-target="#week-1-notes">Week 1 Notes</a></li>
-  <li><a href="#week-2-statistical-learning-introduction" id="toc-week-2-statistical-learning-introduction" class="nav-link" data-scroll-target="#week-2-statistical-learning-introduction">Week 2: Statistical Learning Introduction</a>
+  <li><a href="#chapter-2-statistical-learning-introduction" id="toc-chapter-2-statistical-learning-introduction" class="nav-link" data-scroll-target="#chapter-2-statistical-learning-introduction">Chapter 2: Statistical Learning Introduction</a>
   <ul>
   <li><a href="#notes" id="toc-notes" class="nav-link" data-scroll-target="#notes">Notes</a></li>
   <li><a href="#lab-intro-to-r" id="toc-lab-intro-to-r" class="nav-link" data-scroll-target="#lab-intro-to-r">Lab: Intro to R</a></li>
   </ul></li>
-  <li><a href="#week-3-linear-regression" id="toc-week-3-linear-regression" class="nav-link" data-scroll-target="#week-3-linear-regression">Week 3: Linear Regression</a>
+  <li><a href="#chapter-3-linear-regression" id="toc-chapter-3-linear-regression" class="nav-link" data-scroll-target="#chapter-3-linear-regression">Chapter 3: Linear Regression</a>
   <ul>
   <li><a href="#notes-1" id="toc-notes-1" class="nav-link" data-scroll-target="#notes-1">Notes</a></li>
   <li><a href="#lab-regression-in-r" id="toc-lab-regression-in-r" class="nav-link" data-scroll-target="#lab-regression-in-r">Lab: Regression in R</a>
@@ -101,12 +101,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#writing-functions-in-r" id="toc-writing-functions-in-r" class="nav-link" data-scroll-target="#writing-functions-in-r">Writing functions in R</a></li>
   </ul></li>
   </ul></li>
-  <li><a href="#week-4-classification" id="toc-week-4-classification" class="nav-link" data-scroll-target="#week-4-classification">Week 4: Classification</a>
+  <li><a href="#chapter-4-classification" id="toc-chapter-4-classification" class="nav-link" data-scroll-target="#chapter-4-classification">Chapter 4: Classification</a>
   <ul>
   <li><a href="#notes-2" id="toc-notes-2" class="nav-link" data-scroll-target="#notes-2">Notes</a></li>
+  <li><a href="#lab-classification-methods-in-r" id="toc-lab-classification-methods-in-r" class="nav-link" data-scroll-target="#lab-classification-methods-in-r">Lab: Classification Methods in R</a>
+  <ul>
+  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
+  <li><a href="#linear-discriminant-analysis" id="toc-linear-discriminant-analysis" class="nav-link" data-scroll-target="#linear-discriminant-analysis">Linear Discriminant Analysis</a></li>
+  <li><a href="#quadratic-discriminant-analysis" id="toc-quadratic-discriminant-analysis" class="nav-link" data-scroll-target="#quadratic-discriminant-analysis">Quadratic Discriminant Analysis</a></li>
+  <li><a href="#naive-bayes" id="toc-naive-bayes" class="nav-link" data-scroll-target="#naive-bayes">Naive Bayes</a></li>
+  </ul></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Machine Learning Notes.md"><i class="bi bi-file-code"></i>Github (GFM)</a></li><li><a href="Machine Learning Notes.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Machine Learning Notes.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </div>
 <main class="content" id="quarto-document-content">
 
@@ -159,8 +166,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 </ul>
 </section>
-<section id="week-2-statistical-learning-introduction" class="level2">
-<h2 class="anchored" data-anchor-id="week-2-statistical-learning-introduction">Week 2: Statistical Learning Introduction</h2>
+<section id="chapter-2-statistical-learning-introduction" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-2-statistical-learning-introduction">Chapter 2: Statistical Learning Introduction</h2>
 <section id="notes" class="level3">
 <h3 class="anchored" data-anchor-id="notes">Notes</h3>
 <p>Shared assumptions of linear and non-linear statistical models for estimating <em>f</em>:</p>
@@ -309,8 +316,8 @@ MSE = \frac{1}{n}\sum_{i=1}^n(y_i-\hat{f}(x_i))^2
 <p><code>list()</code> Create a list</p>
 </section>
 </section>
-<section id="week-3-linear-regression" class="level2">
-<h2 class="anchored" data-anchor-id="week-3-linear-regression">Week 3: Linear Regression</h2>
+<section id="chapter-3-linear-regression" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-3-linear-regression">Chapter 3: Linear Regression</h2>
 <section id="notes-1" class="level3">
 <h3 class="anchored" data-anchor-id="notes-1">Notes</h3>
 <p>Inference problem example - which advertising strategy will lead to higher product sales next year?</p>
@@ -850,24 +857,149 @@ Medium    0      1</code></pre>
 </section>
 </section>
 </section>
-<section id="week-4-classification" class="level2">
-<h2 class="anchored" data-anchor-id="week-4-classification">Week 4: Classification</h2>
+<section id="chapter-4-classification" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-4-classification">Chapter 4: Classification</h2>
 <section id="notes-2" class="level3">
 <h3 class="anchored" data-anchor-id="notes-2">Notes</h3>
 <p>Classification techniques are used when the dependent variable Y is qualitative or categorical.</p>
 <ol type="1">
 <li>Logistic regression
+<ol type="A">
+<li>Estimation process:
 <ol type="1">
 <li>Create probability functions to estimate coefficients based on training data</li>
 <li>Use new probability equation to predict probabilities</li>
 <li>Set a boundary (i.e.&nbsp;.5) to classy to one category or the other</li>
 <li>interpreting coefficients - change in log-odds, not change in probability</li>
 </ol></li>
-<li>Linear Discriminant Analysis</li>
-<li>Quadratic Discriminant Analysis</li>
+<li>Note: the coefficients estimated in logistic regression are the change in <em>log-odds</em>, however, these can be plugged back into an equation to calculate probability</li>
+</ol></li>
+<li>Bayes Classifier
+<ol type="1">
+<li><p>Calculate probabilities of each classification outcome</p></li>
+<li><p>Bayes classifier picks the largest probability to assign a class</p></li>
+<li><p>What kind of data is needed to calculate probabilities in step 1? You need a lot of it to make accurate calculations, and sufficient data is not often available. It can, however, be used with simulated data for examples.</p></li>
+</ol></li>
+<li>Linear Discriminant Analysis (LDA)
+<ol type="1">
+<li>Bayes Theorem - used to flip conditional probabilities</li>
+<li>Assumption - the distributions of X are normal or Gaussian</li>
+<li>Assumption - both the outcome distributions have the same variance (not an assumption of QDA)</li>
+<li>Data statistics needed to plug into the equation with two classes and one predictor: <span class="math inline">\(\sigma, \pi_1, \pi_2, \mu_1, \mu_2\)</span> where <span class="math inline">\(\sigma\)</span> is the shared variance, <span class="math inline">\(\pi_1 and \pi_2\)</span> are the prior probabilities of k = 1, 2, and <span class="math inline">\(\mu_1 and \mu_2\)</span> are the means</li>
+</ol></li>
+<li>Quadratic Discriminant Analysis (QDA)</li>
 <li>Naive Bayes</li>
 </ol>
 <p>Comparison of methods</p>
+</section>
+<section id="lab-classification-methods-in-r" class="level3">
+<h3 class="anchored" data-anchor-id="lab-classification-methods-in-r">Lab: Classification Methods in R</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(Smarket)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Year"      "Lag1"      "Lag2"      "Lag3"      "Lag4"      "Lag5"     
+[7] "Volume"    "Today"     "Direction"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Smarket)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1250    9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(Smarket)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Year           Lag1                Lag2                Lag3          
+ Min.   :2001   Min.   :-4.922000   Min.   :-4.922000   Min.   :-4.922000  
+ 1st Qu.:2002   1st Qu.:-0.639500   1st Qu.:-0.639500   1st Qu.:-0.640000  
+ Median :2003   Median : 0.039000   Median : 0.039000   Median : 0.038500  
+ Mean   :2003   Mean   : 0.003834   Mean   : 0.003919   Mean   : 0.001716  
+ 3rd Qu.:2004   3rd Qu.: 0.596750   3rd Qu.: 0.596750   3rd Qu.: 0.596750  
+ Max.   :2005   Max.   : 5.733000   Max.   : 5.733000   Max.   : 5.733000  
+      Lag4                Lag5              Volume           Today          
+ Min.   :-4.922000   Min.   :-4.92200   Min.   :0.3561   Min.   :-4.922000  
+ 1st Qu.:-0.640000   1st Qu.:-0.64000   1st Qu.:1.2574   1st Qu.:-0.639500  
+ Median : 0.038500   Median : 0.03850   Median :1.4229   Median : 0.038500  
+ Mean   : 0.001636   Mean   : 0.00561   Mean   :1.4783   Mean   : 0.003138  
+ 3rd Qu.: 0.596750   3rd Qu.: 0.59700   3rd Qu.:1.6417   3rd Qu.: 0.596750  
+ Max.   : 5.733000   Max.   : 5.73300   Max.   :3.1525   Max.   : 5.733000  
+ Direction 
+ Down:602  
+ Up  :648  
+           
+           
+           
+           </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(Smarket[,<span class="sc">-</span><span class="dv">9</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             Year         Lag1         Lag2         Lag3         Lag4
+Year   1.00000000  0.029699649  0.030596422  0.033194581  0.035688718
+Lag1   0.02969965  1.000000000 -0.026294328 -0.010803402 -0.002985911
+Lag2   0.03059642 -0.026294328  1.000000000 -0.025896670 -0.010853533
+Lag3   0.03319458 -0.010803402 -0.025896670  1.000000000 -0.024051036
+Lag4   0.03568872 -0.002985911 -0.010853533 -0.024051036  1.000000000
+Lag5   0.02978799 -0.005674606 -0.003557949 -0.018808338 -0.027083641
+Volume 0.53900647  0.040909908 -0.043383215 -0.041823686 -0.048414246
+Today  0.03009523 -0.026155045 -0.010250033 -0.002447647 -0.006899527
+               Lag5      Volume        Today
+Year    0.029787995  0.53900647  0.030095229
+Lag1   -0.005674606  0.04090991 -0.026155045
+Lag2   -0.003557949 -0.04338321 -0.010250033
+Lag3   -0.018808338 -0.04182369 -0.002447647
+Lag4   -0.027083641 -0.04841425 -0.006899527
+Lag5    1.000000000 -0.02200231 -0.034860083
+Volume -0.022002315  1.00000000  0.014591823
+Today  -0.034860083  0.01459182  1.000000000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(Smarket)</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(Volume)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Machine-Learning-Notes_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<section id="logistic-regression" class="level4">
+<h4 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h4>
+<p>The <code>glm()</code> function can be used for generalized linear models including logistic regression. Need to include the argument <code>family = binomial</code> to specify logistic regression as the method.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Construct a logistic regression model to predict the qualitative variable Direction</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>glm.fits <span class="ot">&lt;-</span> <span class="fu">glm</span>(</span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a>  Direction <span class="sc">~</span> Lag1 <span class="sc">+</span> Lag2 <span class="sc">+</span> Lag3 <span class="sc">+</span> Lag4 <span class="sc">+</span> Lag5 <span class="sc">+</span> Volume, <span class="at">data =</span> Smarket, <span class="at">family =</span> binomial</span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(glm.fits)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+glm(formula = Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + 
+    Volume, family = binomial, data = Smarket)
+
+Coefficients:
+             Estimate Std. Error z value Pr(&gt;|z|)
+(Intercept) -0.126000   0.240736  -0.523    0.601
+Lag1        -0.073074   0.050167  -1.457    0.145
+Lag2        -0.042301   0.050086  -0.845    0.398
+Lag3         0.011085   0.049939   0.222    0.824
+Lag4         0.009359   0.049974   0.187    0.851
+Lag5         0.010313   0.049511   0.208    0.835
+Volume       0.135441   0.158360   0.855    0.392
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 1731.2  on 1249  degrees of freedom
+Residual deviance: 1727.6  on 1243  degrees of freedom
+AIC: 1741.6
+
+Number of Fisher Scoring iterations: 3</code></pre>
+</div>
+</div>
+</section>
+<section id="linear-discriminant-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="linear-discriminant-analysis">Linear Discriminant Analysis</h4>
+</section>
+<section id="quadratic-discriminant-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="quadratic-discriminant-analysis">Quadratic Discriminant Analysis</h4>
+</section>
+<section id="naive-bayes" class="level4">
+<h4 class="anchored" data-anchor-id="naive-bayes">Naive Bayes</h4>
+</section>
 </section>
 </section>
 
